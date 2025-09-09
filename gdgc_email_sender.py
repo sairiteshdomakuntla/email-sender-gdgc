@@ -537,8 +537,8 @@ def main():
     
     # Configuration - UPDATE THESE VALUES
     SHEET_ID = "1Pf9ROUKO3gqoyB35TnPIM6I7EY8kR_qsaH5hCwZFvr8"  # ✅ Already correct
-    SENDER_EMAIL = "gdgc@vnrvjiet.in"  # ✅ Updated with your email
-    SENDER_PASSWORD = "flsg jlvi ddoq suao"  # ❌ You need to replace this
+    SENDER_EMAIL = "laksita2004@gmail.com"  # ✅ Updated with your email
+    SENDER_PASSWORD = "ndwn xfcs xwqg zfkq"  # ❌ You need to replace this
 
     # Create email sender instance
     sender = GDGCEmailSender(SHEET_ID, SENDER_EMAIL, SENDER_PASSWORD)

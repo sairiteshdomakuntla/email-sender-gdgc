@@ -2,9 +2,9 @@
 
 ## Prerequisites
 
-1. Python 3.7 or higher
-2. Gmail account
-3. Google Sheets API access
+1. **Python 3.7 or higher**
+2. **Gmail account**
+3. **Public Google Sheet** (no API required)
 
 ## Setup Steps
 
@@ -23,30 +23,29 @@ pip install -r requirements.txt
    - Generate password for "Mail" application
    - Copy the 16-character password
 
-### 3. Google Sheets API Setup
+### 3. Google Sheets Setup (Simplified)
 
-#### Option A: Service Account (Recommended)
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create new project or select existing one
-3. Enable Google Sheets API
-4. Create Service Account:
-   - IAM & Admin → Service Accounts → Create Service Account
-   - Download JSON key file
-   - Rename to `service-account.json` and place in project folder
-5. Share your Google Sheet with the service account email
+#### Make Your Sheet Public
+1. Open your Google Sheet
+2. Click **"Share"** button (top-right)
+3. Click **"Change to anyone with the link"**
+4. Set permission to **"Viewer"**
+5. Copy the **Sheet ID** from URL
 
-#### Option B: OAuth (Alternative)
-1. Create OAuth credentials in Google Cloud Console
-2. Download credentials.json file
-3. First run will open browser for authentication
+**Example URL:**
+```
+https://docs.google.com/spreadsheets/d/1Pf9ROUKO3gqoyB35TnPIM6I7EY8kR_qsaH5hCwZFvr8/edit
+```
+**Sheet ID:** `1Pf9ROUKO3gqoyB35TnPIM6I7EY8kR_qsaH5hCwZFvr8`
 
 ### 4. Update Configuration
 
-Edit `gdgc_email_sender.py` and update these variables:
+Edit [`gdgc_email_sender.py`](gdgc_email_sender.py) and update these variables:
 
 ```python
-SENDER_EMAIL = "your-email@gmail.com"  # Your Gmail address
-SENDER_PASSWORD = "your-app-password"  # 16-character app password from step 2
+SHEET_ID = "your-google-sheet-id-here"      # From step 3
+SENDER_EMAIL = "your-email@gmail.com"       # Your Gmail address
+SENDER_PASSWORD = "your-app-password-here"  # 16-character app password from step 2
 ```
 
 ### 5. Sheet Format
@@ -75,13 +74,13 @@ python gdgc_email_sender.py
 
 ## Security Notes
 
-- Never commit `service-account.json` or credentials to version control
+- **No service account needed** - Uses public sheet CSV export
 - Use app passwords, not regular Gmail passwords
-- Add these files to `.gitignore`:
+- Keep your app password secure and don't commit it to version control
+- Add sensitive files to `.gitignore`:
   ```
-  service-account.json
-  credentials.json
   *.log
+  .env
   ```
 
 ## Troubleshooting
@@ -89,16 +88,24 @@ python gdgc_email_sender.py
 ### Common Issues:
 
 1. **"Authentication failed"**
-   - Check app password is correct
+   - Check app password is correct (16 characters, no spaces)
    - Ensure 2FA is enabled on Gmail
+   - Try generating a new app password
 
-2. **"Google Sheets access denied"**
-   - Share sheet with service account email
-   - Check sheet ID is correct
+2. **"Error reading emails from sheet"**
+   - Ensure sheet is set to "Anyone with the link can view"
+   - Check sheet ID is correct (from the URL)
+   - Make sure emails are in Column A
 
 3. **"Rate limit exceeded"**
    - Script has 1-second delay between emails
    - Gmail limit: ~100 emails per day for new accounts
+   - Wait 24 hours before sending more
+
+4. **"No valid emails found"**
+   - Check that Column A contains valid email addresses
+   - Remove any headers or empty rows at the top
+   - Ensure emails contain '@' symbol
 
 ### Logs
 
@@ -106,8 +113,12 @@ Check console output for detailed error messages and progress updates.
 
 ## Features
 
-- ✅ Reads emails from Google Sheets column A
-- ✅ Professional HTML email template
+- ✅ **No API setup required** - Uses public sheet CSV export
+- ✅ **Simple configuration** - Just Sheet ID and Gmail credentials
+- ✅ Professional HTML email template with GDGC branding
+- ✅ Assignment document link and submission form
+- ✅ Contact information (phone numbers)
+- ✅ Social media links (LinkedIn & Instagram)
 - ✅ Error handling and logging
 - ✅ Rate limiting to avoid Gmail limits
 - ✅ Test email functionality
@@ -115,9 +126,31 @@ Check console output for detailed error messages and progress updates.
 
 ## Email Content
 
-The script sends a professionally formatted GDGC recruitment assignment email with:
-- Job Portal Assignment details
-- Core features requirements
-- Bonus features (optional)
-- Guidelines and deadline
-- GDGC branding and styling
+The script sends a professionally formatted GDGC recruitment email with:
+
+### 📋 **Assignment Section:**
+- Link to assignment document
+- Clear instructions to view requirements
+
+### 📝 **Submission Section:** 
+- Google Forms link for assignment submission
+- Green button for easy identification
+
+### 📞 **Contact Information:**
+- Sai Ritesh: 8639154193
+- Hasnika: 7981367685
+
+### 🔗 **Social Media Links:**
+- LinkedIn: https://www.linkedin.com/company/gdsc-vnrvjiet/
+- Instagram: https://www.instagram.com/gdgc.vnrvjiet
+
+## Quick Start
+
+1. Make your Google Sheet public
+2. Copy Sheet ID from URL  
+3. Get Gmail app password
+4. Update configuration in script
+5. Run `python gdgc_email_sender.py`
+6. Test with option 1 first!
+
+**That's it! No complex API setup needed.** 🚀
