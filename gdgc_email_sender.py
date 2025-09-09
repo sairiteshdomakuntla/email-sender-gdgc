@@ -72,8 +72,6 @@ class GDGCEmailSender:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
@@ -81,28 +79,27 @@ class GDGCEmailSender:
         }
         
         body { 
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; 
+            font-family: Arial, sans-serif; 
             line-height: 1.6; 
             color: #2d3748; 
             margin: 0; 
             padding: 0; 
-            background: #f7fafc;
+            background: #f7f7f7;
         }
         
         .email-wrapper {
-            background: #f7fafc;
+            background: #f7f7f7;
             padding: 20px 0;
-            min-height: 100vh;
         }
         
         .container { 
             max-width: 680px; 
             margin: 0 auto; 
             background: #ffffff; 
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e2e2e2;
         }
         
         .header { 
@@ -115,7 +112,6 @@ class GDGCEmailSender:
             height: auto;
             display: block;
             max-height: 250px;
-            object-fit: cover;
         }
         
         .content { 
@@ -139,9 +135,9 @@ class GDGCEmailSender:
         }
         
         .assignment-doc-box {
-            background: #f8fafc;
+            background: #f8f9fa;
             border: 2px solid #4299e1;
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 35px;
             margin: 30px 0;
             text-align: center;
@@ -168,22 +164,44 @@ class GDGCEmailSender:
             color: white;
             text-decoration: none;
             padding: 15px 30px;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
             font-size: 16px;
-            transition: all 0.2s ease;
+            margin: 0 10px 10px 0;
         }
         
         .doc-link-button:hover {
             background: #3182ce;
-            text-decoration: none;
-            color: white;
+        }
+        
+        .submission-form-box {
+            background: #f0fff4;
+            border: 2px solid #48bb78;
+            border-radius: 8px;
+            padding: 35px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .submission-form-box h3 {
+            color: #2d5016;
+            margin: 0 0 20px 0;
+            font-size: 22px;
+            font-weight: 700;
+        }
+        
+        .submission-form-box p {
+            color: #38a169;
+            font-weight: 500;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 16px;
         }
         
         .deadline-box {
             background: #fff5f5;
             border: 2px solid #fc8181;
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 28px;
             margin: 25px 0;
             text-align: center;
@@ -211,7 +229,7 @@ class GDGCEmailSender:
         .closing-text {
             background: #f0fff4;
             padding: 28px;
-            border-radius: 12px;
+            border-radius: 8px;
             border-left: 4px solid #48bb78;
             margin: 30px 0;
             color: #38a169;
@@ -224,33 +242,32 @@ class GDGCEmailSender:
             text-align: center;
             margin: 30px 0;
             padding: 24px;
-            background: #f8fafc;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e2e2e2;
         }
         
         .contact-info p {
             color: #4a5568;
             font-weight: 400;
-            margin: 0;
+            margin: 8px 0;
+            line-height: 1.5;
         }
         
         .contact-info a {
             color: #4299e1;
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.2s ease;
         }
         
         .contact-info a:hover {
-            color: #3182ce;
             text-decoration: underline;
         }
         
         .footer { 
             background: #2d3748;
             color: white;
-            padding: 30px 35px; 
+            padding: 35px; 
             text-align: center; 
         }
         
@@ -268,13 +285,47 @@ class GDGCEmailSender:
             margin-bottom: 8px;
         }
         
+        .social-section {
+            margin: 20px 0 15px 0;
+            text-align: center;
+        }
+        
+        .social-text {
+            color: #cbd5e1;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+        
+        .social-icons {
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .social-icon {
+            display: inline-block;
+            margin: 0 15px;
+            text-decoration: none;
+            color: #cbd5e1;
+        }
+        
+        .social-icon img {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+        }
+        
+        .social-icon:hover {
+            color: #ffffff;
+        }
+        
         .divider {
             height: 1px;
-            background: #e2e8f0;
+            background: #e2e2e2;
             margin: 30px 0;
         }
         
-        /* Responsive styles */
+        /* Mobile responsive - simplified */
         @media only screen and (max-width: 600px) {
             .email-wrapper {
                 padding: 10px;
@@ -282,14 +333,15 @@ class GDGCEmailSender:
             
             .container { 
                 margin: 0;
-                border-radius: 8px;
+                border-radius: 6px;
             }
             
             .content { 
                 padding: 25px 20px; 
             }
             
-            .assignment-doc-box {
+            .assignment-doc-box,
+            .submission-form-box {
                 padding: 25px 20px;
                 margin: 20px 0;
             }
@@ -297,6 +349,8 @@ class GDGCEmailSender:
             .doc-link-button {
                 padding: 12px 24px;
                 font-size: 14px;
+                display: block;
+                margin: 10px 0;
             }
             
             .deadline-box {
@@ -306,6 +360,10 @@ class GDGCEmailSender:
             
             .footer {
                 padding: 25px 20px;
+            }
+            
+            .social-icon {
+                margin: 0 12px;
             }
         }
     </style>
@@ -331,6 +389,14 @@ class GDGCEmailSender:
                     </a>
                 </div>
                 
+                <div class="submission-form-box">
+                    <h3>📝 Assignment Submission</h3>
+                    <p>Once you complete the assignment, submit your project using the form below:</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe-V4n86_n-AM2JGU8T0x3QJ1pm7Di6DVNZ-mMJYgLtd3ceMA/viewform" class="doc-link-button" style="background: #48bb78;">
+                        📤 Submit Assignment
+                    </a>
+                </div>
+                
                 <div class="deadline-box">
                     <h4>📅 Important Note</h4>
                     <p>Please refer to the assignment document for <strong>submission deadline</strong> and other important details.</p>
@@ -342,13 +408,28 @@ class GDGCEmailSender:
                 </div>
                 
                 <div class="contact-info">
-                    <p>📧 For any queries or clarifications, contact us at <a href="mailto:gdgc@vnrvjiet.in">gdgc@vnrvjiet.in</a></p>
+                    <p><strong>📞 For any queries or clarifications, contact:</strong></p>
+                    <p>Sai Ritesh: <a href="tel:+918639154193">8639154193</a></p>
+                    <p>Hasnika: <a href="tel:+917981367685">7981367685</a></p>
                 </div>
             </div>
             
             <div class="footer">
                 <p class="team-name">GDGC Team</p>
                 <p><strong>Google Developer Groups on Campus - VNRVJIET</strong></p>
+                
+                <div class="social-section">
+                    <p class="social-text">Follow us on social media</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/company/gdsc-vnrvjiet/" class="social-icon" target="_blank">
+                            LinkedIn
+                        </a>
+                        <a href="https://www.instagram.com/gdgc.vnrvjiet" class="social-icon" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width:24px;height:24px;vertical-align:middle;">
+                        </a>
+                    </div>
+                </div>
+                
                 <p><em>This is an automated email. Please keep this for your records.</em></p>
             </div>
         </div>
@@ -456,9 +537,9 @@ def main():
     
     # Configuration - UPDATE THESE VALUES
     SHEET_ID = "1Pf9ROUKO3gqoyB35TnPIM6I7EY8kR_qsaH5hCwZFvr8"  # ✅ Already correct
-    SENDER_EMAIL = "domakuntlasairitesh@gmail.com"  # ✅ Updated with your email
-    SENDER_PASSWORD = "puxv gfmi wztv kgnw"  # ❌ You need to replace this
-    
+    SENDER_EMAIL = "gdgc@vnrvjiet.in"  # ✅ Updated with your email
+    SENDER_PASSWORD = "flsg jlvi ddoq suao"  # ❌ You need to replace this
+
     # Create email sender instance
     sender = GDGCEmailSender(SHEET_ID, SENDER_EMAIL, SENDER_PASSWORD)
     
